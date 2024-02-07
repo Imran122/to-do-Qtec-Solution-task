@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useContextData = () => {
-  const [taskList, setTaskList] = useState("ooo");
+  const [taskList, setTaskList] = useState([]);
 
   return {
     taskList,

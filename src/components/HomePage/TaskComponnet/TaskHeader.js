@@ -12,7 +12,7 @@ export default function TaskHeader() {
     : " absolute top-60 opacity-0 scale-50 w-full left-0  duration-700";
   return (
     <div class="mb-14 items-center justify-between sm:flex">
-      <h2 class="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
+      <h2 class="text-2xl font-semibold max-sm:mb-4">Your Tasks List</h2>
       <div class="flex items-center space-x-5">
         <form>
           <div class="flex">
@@ -54,9 +54,19 @@ export default function TaskHeader() {
         >
           Add Task
         </button>
-        <button class="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">
-          Delete All
-        </button>
+        <div className="space-y-2 lg:space-y-3">
+          <select
+            className="block w-full cursor-pointer rounded-md bg-[#263046] px-3 py-2.5"
+            name="priority"
+            id="priority"
+            required
+          >
+            <option value="">FIlter By Priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
       </div>
       <div className={modalClass}>
         <AddTask setShowPop={setShowPop} />
