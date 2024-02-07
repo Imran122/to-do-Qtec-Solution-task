@@ -1,4 +1,15 @@
+import { useState } from "react";
+import AddTask from "./AddTask";
+
 export default function TaskHeader() {
+  const [showPop, setShowPop] = useState(false);
+
+  const handelShow = () => {
+    setShowPop(!showPop);
+  };
+  const modalClass = showPop
+    ? "absolute z-50 top-60 w-full left-0 duration-700 opacity-100 scale-100 "
+    : " absolute -top-60 opacity-0 scale-50 w-full left-0  duration-700";
   return (
     <div class="mb-14 items-center justify-between sm:flex">
       <h2 class="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
@@ -37,12 +48,18 @@ export default function TaskHeader() {
             </div>
           </div>
         </form>
-        <button class="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold">
+        <button
+          onClick={handelShow}
+          class="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
+        >
           Add Task
         </button>
         <button class="rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold">
           Delete All
         </button>
+      </div>
+      <div className={modalClass}>
+        <AddTask setShowPop={setShowPop} />
       </div>
     </div>
   );

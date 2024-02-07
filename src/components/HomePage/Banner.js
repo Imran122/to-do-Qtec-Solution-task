@@ -1,5 +1,6 @@
 import Image from "next/image";
 import baqnnerimg from "../../assets/banner3.jpg";
+
 export default function Banner() {
   return (
     <section class="pb-[114px]">
