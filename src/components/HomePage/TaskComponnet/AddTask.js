@@ -1,7 +1,11 @@
+import useContextData from "@/hooks/useContextData";
+
 export default function AddTask({ setShowPop }) {
+  const { taskList } = useContextData();
   const handleSubmit = (event) => {
     setShowPop(false);
   };
+
   return (
     <div className="">
       <form

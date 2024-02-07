@@ -22,8 +22,8 @@ export default function TaskList() {
         <div class="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#263046] px-6 py-8 md:px-9 md:py-16">
           <TaskHeader />
 
-          <div class="overflow-auto">
-            <table class="table-fixed overflow-auto xl:w-full">
+          <div class="overflow-x-auto">
+            <table class="table-fixed overflow-x-auto xl:w-full">
               <thead>
                 <tr>
                   <th class="p-4 pb-8 text-sm font-semibold capitalize w-[48px]"></th>
@@ -50,7 +50,7 @@ export default function TaskList() {
                 </tr>
               </thead>
               <tbody>
-                <tr class="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
+                <tr class="border-b border-[#656c7e] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
                   <td>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ export default function TaskList() {
                     </div>
                   </td>
                 </tr>
-                <tr class="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
+                <tr class="border-b border-[#656c7e] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2">
                   <td>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
