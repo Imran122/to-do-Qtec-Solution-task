@@ -1,16 +1,21 @@
 import { useState } from "react";
+import EditTask from "./TaskComponnet/EditTask";
 import TaskHeader from "./TaskComponnet/TaskHeader";
 
 export default function TaskList() {
   const [showPop, setShowPop] = useState(false);
-  const modalClass = showPop
-    ? "absolute z-50 -top-60 w-full left-0 duration-700 opacity-100 scale-100 "
-    : " absolute -top-60 opacity-0 scale-50 w-full left-0  duration-700";
 
   const handleDeleteTask = (taskId) => {
     setDeleteModal(true);
     setDeleteTaskId(taskId);
   };
+
+  const handelShow = () => {
+    setShowPop(!showPop);
+  };
+  const modalClass = showPop
+    ? "absolute z-50 top-40 w-full left-1/2 -translate-x-1/2 duration-700 opacity-100 scale-100 "
+    : " absolute top-60 opacity-0 scale-50 w-full left-0  duration-700";
   return (
     <section class="mb-20" id="tasks">
       <div class="container">
@@ -260,6 +265,9 @@ export default function TaskList() {
             </table>
           </div>
         </div>
+      </div>
+      <div className={modalClass}>
+        <EditTask setShowPop={setShowPop} />
       </div>
     </section>
   );
