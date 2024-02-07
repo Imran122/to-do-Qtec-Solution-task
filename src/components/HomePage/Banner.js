@@ -10,12 +10,12 @@ export default function Banner() {
           </div>
           <div>
             <h1 class="mb-1.5 text-[56px] font-bold leading-none text-[#F5BF42] lg:text-[73px]">
-              Tasker
+              To Do Task
             </h1>
             <p class="text-lg my-2 opacity-60">
-              Effortlessly Organize, Prioritize, and Conquer Tasks with Tasker -
-              Your Personal Productivity Ally for Seamless Goal Achievement and
-              Stress-Free Task Management.
+              Trusted by 30 million people and teams. Todoist is the world`s
+              favorite task manager and to-do list app. Finally become focused,
+              organized and calm
             </p>
           </div>
         </div>
