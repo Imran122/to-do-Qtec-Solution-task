@@ -8,8 +8,8 @@ export default function TaskHeader() {
     setShowPop(!showPop);
   };
   const modalClass = showPop
-    ? "absolute z-50 top-60 w-full left-0 duration-700 opacity-100 scale-100 "
-    : " absolute -top-60 opacity-0 scale-50 w-full left-0  duration-700";
+    ? "absolute z-50 top-40 w-full left-1/2 -translate-x-1/2 duration-700 opacity-100 scale-100 "
+    : " absolute top-60 opacity-0 scale-50 w-full left-0  duration-700";
   return (
     <div class="mb-14 items-center justify-between sm:flex">
       <h2 class="text-2xl font-semibold max-sm:mb-4">Your Tasks</h2>
