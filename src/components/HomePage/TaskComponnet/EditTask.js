@@ -1,9 +1,14 @@
 import useContextData from "@/hooks/useContextData";
 import { useState } from "react";
 
-export default function EditTask({ setShowPop, taskData }) {
+export default function EditTask({
+  setShowPop,
+  taskData,
+  setLoading,
+  loading,
+}) {
   // Find the task to edit based on taskId
-  const { taskList, setTaskList, loading, setLoading } = useContextData();
+  const { taskList, setTaskList } = useContextData();
   const [formData, setFormData] = useState({});
 
   const handleChange = (event) => {
@@ -29,7 +34,7 @@ export default function EditTask({ setShowPop, taskData }) {
 
     // Update local storage
     localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
-
+    setLoading(!loading);
     // Close the form
     setShowPop(false);
   };

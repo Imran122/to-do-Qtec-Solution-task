@@ -1,8 +1,8 @@
 import useContextData from "@/hooks/useContextData";
 import { useEffect, useState } from "react";
 
-export default function AddTask({ setShowPop }) {
-  const { taskList, setTaskList, loading, setLoading } = useContextData();
+export default function AddTask({ setShowPop, setLoading, loading }) {
+  const { taskList, setTaskList } = useContextData();
   const [id, setId] = useState(0);
 
   // Get the maximum id from existing tasks in local storage
@@ -43,7 +43,7 @@ export default function AddTask({ setShowPop }) {
     event.target.tags.value = "";
     event.target.priority.value = "";
     setId(id + 1);
-    setLoading(true);
+    setLoading(!loading);
     setShowPop(false);
   };
 

@@ -11,12 +11,11 @@ export default function TaskList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [showPop, setShowPop] = useState(false);
   const [taskData, setTaskData] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     taskList,
     setTaskList,
 
-    loading,
-    setLoading,
     searchDataList,
     setSearchDataList,
   } = useContextData();
@@ -55,7 +54,11 @@ export default function TaskList() {
     <section className="mb-20" id="tasks">
       <div className="container">
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#263046] px-6 py-8 md:px-9 md:py-16">
-          <TaskHeader setSearchQuery={setSearchQuery} />
+          <TaskHeader
+            loading={loading}
+            setLoading={setLoading}
+            setSearchQuery={setSearchQuery}
+          />
 
           <div className="overflow-x-auto">
             <table className="table-fixed overflow-x-auto xl:w-full">
@@ -155,7 +158,12 @@ export default function TaskList() {
         </div>
       </div>
       <div className={modalClass}>
-        <EditTask taskData={taskData} setShowPop={setShowPop} />
+        <EditTask
+          loading={loading}
+          setLoading={setLoading}
+          taskData={taskData}
+          setShowPop={setShowPop}
+        />
       </div>
     </section>
   );

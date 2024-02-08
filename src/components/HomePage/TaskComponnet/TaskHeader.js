@@ -2,10 +2,9 @@ import useContextData from "@/hooks/useContextData";
 import { useState } from "react";
 import AddTask from "./AddTask";
 
-export default function TaskHeader({ setSearchQuery }) {
+export default function TaskHeader({ setSearchQuery, setLoading, loading }) {
   const [showPop, setShowPop] = useState(false);
-  const { taskList, setTaskList, setSearchDataList, loading, setLoading } =
-    useContextData();
+  const { taskList, setTaskList, setSearchDataList } = useContextData();
   const handelShow = () => {
     setShowPop(!showPop);
   };
@@ -53,7 +52,11 @@ export default function TaskHeader({ setSearchQuery }) {
         </div>
       </div>
       <div className={modalClass}>
-        <AddTask setShowPop={setShowPop} />
+        <AddTask
+          loading={loading}
+          setLoading={setLoading}
+          setShowPop={setShowPop}
+        />
       </div>
     </div>
   );
