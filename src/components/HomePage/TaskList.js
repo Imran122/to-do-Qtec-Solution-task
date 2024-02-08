@@ -49,7 +49,17 @@ export default function TaskList() {
     );
     setSearchDataList(filteredTasks);
   }, [searchQuery, taskList]);
-
+  console.log("taskList", taskList);
+  const handleCompleteTask = (taskId) => {
+    const updatedTaskList = taskList.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, complete: true };
+      }
+      return task;
+    });
+    setTaskList(updatedTaskList);
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
+  };
   return (
     <section className="mb-20" id="tasks">
       <div className="container">
@@ -64,7 +74,9 @@ export default function TaskList() {
             <table className="table-fixed overflow-x-auto xl:w-full">
               <thead>
                 <tr>
-                  <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]"></th>
+                  <th className="p-4 pb-8 text-sm font-semibold capitalize w-[48px]">
+                    Status
+                  </th>
                   <th className="p-4 pb-8 text-sm font-semibold capitalize w-[300px]">
                     {" "}
                     Title{" "}
@@ -97,18 +109,26 @@ export default function TaskList() {
                       <td>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-star"
+                          className={`icon icon-tabler ${
+                            data.complete
+                              ? "icon-tabler-circle-check text-green-500"
+                              : "icon-tabler-circle text-red-500"
+                          }`}
                           width="24"
                           height="24"
                           viewBox="0 0 24 24"
                           stroke-width="2"
-                          stroke="yellow"
-                          fill="yellow"
+                          stroke="currentColor"
+                          fill="none"
                           stroke-linecap="round"
                           stroke-linejoin="round"
+                          onClick={() => handleCompleteTask(data.id)}
+                          style={{ cursor: "pointer" }}
                         >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                          <circle cx="12" cy="12" r="9"></circle>
+                          {data.complete && (
+                            <path d="M9 12l2 2l4 -4" fill="currentColor"></path>
+                          )}
                         </svg>
                       </td>
                       <td>{data.title}</td>
