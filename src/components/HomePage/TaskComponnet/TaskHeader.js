@@ -11,25 +11,25 @@ export default function TaskHeader() {
     ? "absolute z-50 top-40 w-full left-1/2 -translate-x-1/2 duration-700 opacity-100 scale-100 "
     : " absolute top-60 opacity-0 scale-50 w-full left-0  duration-700";
   return (
-    <div class="mb-14 items-center justify-between sm:flex">
-      <h2 class="text-2xl font-semibold max-sm:mb-4">Your Tasks List</h2>
-      <div class="flex items-center space-x-5">
+    <div className="mb-14 items-center justify-between sm:flex">
+      <h2 className="text-2xl font-semibold max-sm:mb-4">Your Tasks List</h2>
+      <div className="flex items-center space-x-5">
         <form>
-          <div class="flex">
-            <div class="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
+          <div className="flex">
+            <div className="relative overflow-hidden rounded-lg text-gray-50 md:min-w-[380px] lg:min-w-[440px]">
               <input
                 type="search"
                 id="search-dropdown"
-                class="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
+                className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
                 placeholder="Search Task"
                 required
               />
               <button
                 type="submit"
-                class="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
+                className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
               >
                 <svg
-                  class="h-4 w-4"
+                  className="h-4 w-4"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -43,14 +43,14 @@ export default function TaskHeader() {
                     d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                   />
                 </svg>
-                <span class="sr-only">Search</span>
+                <span className="sr-only">Search</span>
               </button>
             </div>
           </div>
         </form>
         <button
           onClick={handelShow}
-          class="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
+          className="rounded-md bg-blue-500 px-3.5 py-2.5 text-sm font-semibold"
         >
           Add Task
         </button>

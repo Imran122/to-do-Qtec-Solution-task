@@ -1,40 +1,53 @@
 import useContextData from "@/hooks/useContextData";
+import { useEffect, useState } from "react";
 
 export default function AddTask({ setShowPop }) {
-  const { taskList, setTaskList } = useContextData();
+  const { taskList, setTaskList, loading, setLoading } = useContextData();
+  const [id, setId] = useState(0);
+
+  // Get the maximum id from existing tasks in local storage
+  useEffect(() => {
+    let data = localStorage.getItem("taskList");
+    let localStorageData = data ? JSON.parse(data) : [];
+    let maxId =
+      localStorageData.length > 0
+        ? Math.max(...localStorageData.map((task) => task.id))
+        : 0;
+    setId(maxId + 1);
+    setTaskList(localStorageData);
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Create a new task object
+
+    // Create a new task object with the updated id
     const newTask = {
+      id: id,
       title: event.target.title.value,
       description: event.target.description.value,
       tags: event.target.tags.value,
       priority: event.target.priority.value,
       completed: false,
     };
-    console.log("newTask", newTask);
-
-    // Update the task list state
-    const updatedTaskList = [...taskList, newTask];
-    setTaskList(updatedTaskList);
 
     // Update the localStorage
     let data = localStorage.getItem("taskList");
     let localStorageData = data ? JSON.parse(data) : [];
     localStorageData.push(newTask);
     localStorage.setItem("taskList", JSON.stringify(localStorageData));
-
+    // Update the task list state
+    setTaskList([...taskList, newTask]);
     // Close the form
-    console.log("taskList sub", updatedTaskList);
     event.target.title.value = "";
     event.target.description.value = "";
     event.target.tags.value = "";
     event.target.priority.value = "";
-
+    setId(id + 1);
+    setLoading(true);
     setShowPop(false);
   };
-
+  console.log("loading add page", loading);
+  console.log("add page taskList", taskList);
   return (
     <div className="">
       <form
@@ -76,6 +89,7 @@ export default function AddTask({ setShowPop }) {
                 type="text"
                 name="tags"
                 id="tags"
+                placeholder="multiple tag write by coma"
                 required
               />
             </div>
