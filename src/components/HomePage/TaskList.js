@@ -31,6 +31,7 @@ export default function TaskList() {
 
     const updatedTaskList = taskList.filter((task) => task.id !== taskId);
     setTaskList(updatedTaskList);
+    toast.info("Task deleted!");
     localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
   };
 
