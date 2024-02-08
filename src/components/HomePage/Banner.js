@@ -15,7 +15,7 @@ export default function Banner() {
                 To Do Task
               </h1>
               <p className="text-lg my-2 font-semibold text-[#4ac099]">
-                Trusted by 30 million people and teams. Todoist is the world's
+                Trusted by 30 million people and teams. Todoist is the worlds
                 favorite task manager and to-do list app. Finally become
                 focused, organized and calm
               </p>
