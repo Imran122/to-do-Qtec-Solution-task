@@ -16,9 +16,12 @@ export default function TaskList() {
     let localStorageData = data ? JSON.parse(data) : [];
     setTaskList(localStorageData);
   }, [loading]); // Update the effect dependency
-  const handleDeleteTask = (taskData) => {
-    setDeleteModal(true);
-    setDeleteTaskId(taskData);
+  const handleDeleteTask = (taskId) => {
+    //setDeleteModal(true);
+
+    const updatedTaskList = taskList.filter((task) => task.id !== taskId);
+    setTaskList(updatedTaskList);
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
   };
 
   const handelShow = (id) => {
@@ -110,7 +113,12 @@ export default function TaskList() {
                       <td className="text-center">{data.priority}</td>
                       <td>
                         <div className="flex items-center justify-center space-x-3">
-                          <button className="text-red-500">Delete</button>
+                          <button
+                            onClick={() => handleDeleteTask(data.id)}
+                            className="text-red-500"
+                          >
+                            Delete
+                          </button>
                           <button
                             onClick={() => handelShow(data.id)}
                             className="text-blue-500"
