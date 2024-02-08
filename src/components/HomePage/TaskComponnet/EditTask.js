@@ -1,7 +1,41 @@
-export default function EditTask({ setShowPop }) {
+import useContextData from "@/hooks/useContextData";
+import { useState } from "react";
+
+export default function EditTask({ setShowPop, taskData }) {
+  // Find the task to edit based on taskId
+  const { taskList, setTaskList, loading, setLoading } = useContextData();
+  const [formData, setFormData] = useState({});
+  console.log("taskData*****", taskData);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+  console.log("formData", formData);
+
   const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let data = localStorage.getItem("taskList");
+    let localStorageData = data ? JSON.parse(data) : [];
+    const updatedTaskList = localStorageData.map((task) => {
+      if (task.id === taskData.id) {
+        // Merge formData with existing taskData
+        return { ...task, ...formData };
+      }
+      return task;
+    });
+
+    // Update the task list state
+    setTaskList(updatedTaskList);
+
+    // Update local storage
+    localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
+
+    // Close the form
     setShowPop(false);
   };
+
+  console.log("edit task", taskData);
   return (
     <div className="">
       <form
@@ -20,7 +54,8 @@ export default function EditTask({ setShowPop }) {
               type="text"
               name="title"
               id="title"
-              required
+              defaultValue={taskData.title}
+              onChange={handleChange}
             />
           </div>
 
@@ -28,10 +63,10 @@ export default function EditTask({ setShowPop }) {
             <label htmlFor="description">Description</label>
             <textarea
               className="block min-h-[120px] w-full rounded-md bg-[#2D323F] px-3 py-2.5 lg:min-h-[180px]"
-              type="text"
               name="description"
               id="description"
-              required
+              defaultValue={taskData.description}
+              onChange={handleChange}
             ></textarea>
           </div>
 
@@ -43,7 +78,8 @@ export default function EditTask({ setShowPop }) {
                 type="text"
                 name="tags"
                 id="tags"
-                required
+                defaultValue={taskData.tags}
+                onChange={handleChange}
               />
             </div>
 
@@ -53,7 +89,8 @@ export default function EditTask({ setShowPop }) {
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="priority"
                 id="priority"
-                required
+                defaultValue={taskData.priority}
+                onChange={handleChange}
               >
                 <option value="">Select Priority</option>
                 <option value="low">Low</option>

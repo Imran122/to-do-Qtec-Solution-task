@@ -9,18 +9,22 @@ const getTagColor = (tag) => {
 };
 export default function TaskList() {
   const [showPop, setShowPop] = useState(false);
+  const [taskData, setTaskData] = useState("");
   const { taskList, setTaskList, loading, setLoading } = useContextData();
   useEffect(() => {
     let data = localStorage.getItem("taskList");
     let localStorageData = data ? JSON.parse(data) : [];
     setTaskList(localStorageData);
   }, [loading]); // Update the effect dependency
-  const handleDeleteTask = (taskId) => {
+  const handleDeleteTask = (taskData) => {
     setDeleteModal(true);
-    setDeleteTaskId(taskId);
+    setDeleteTaskId(taskData);
   };
 
-  const handelShow = () => {
+  const handelShow = (id) => {
+    console.log("clicktaskList", taskList);
+    const taskToEdit = taskList.find((task) => task.id === id);
+    setTaskData(taskToEdit);
     setShowPop(!showPop);
   };
   const modalClass = showPop
@@ -107,7 +111,12 @@ export default function TaskList() {
                       <td>
                         <div className="flex items-center justify-center space-x-3">
                           <button className="text-red-500">Delete</button>
-                          <button className="text-blue-500">Edit</button>
+                          <button
+                            onClick={() => handelShow(data.id)}
+                            className="text-blue-500"
+                          >
+                            Edit
+                          </button>
                         </div>
                       </td>
                     </tr>
@@ -123,7 +132,7 @@ export default function TaskList() {
         </div>
       </div>
       <div className={modalClass}>
-        <EditTask setShowPop={setShowPop} />
+        <EditTask taskData={taskData} setShowPop={setShowPop} />
       </div>
     </section>
   );
