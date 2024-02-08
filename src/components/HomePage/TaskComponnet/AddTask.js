@@ -1,50 +1,40 @@
 import useContextData from "@/hooks/useContextData";
-import { useEffect, useState } from "react";
 
 export default function AddTask({ setShowPop }) {
   const { taskList, setTaskList } = useContextData();
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    tags: "",
-    priority: "",
-    completed: false,
-  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Create a new task object
     const newTask = {
-      title: formData.title,
-      description: formData.description,
-      tags: formData.tags,
-      priority: formData.priority,
-      completed: false, // Assuming you want to default completed to false
+      title: event.target.title.value,
+      description: event.target.description.value,
+      tags: event.target.tags.value,
+      priority: event.target.priority.value,
+      completed: false,
     };
+    console.log("newTask", newTask);
+
     // Update the task list state
-    setTaskList([...taskList, newTask]);
-    // Reset form data
-    setFormData({
-      title: "",
-      description: "",
-      tags: "",
-      priority: "",
-    });
+    const updatedTaskList = [...taskList, newTask];
+    setTaskList(updatedTaskList);
+
+    // Update the localStorage
+    let data = localStorage.getItem("taskList");
+    let localStorageData = data ? JSON.parse(data) : [];
+    localStorageData.push(newTask);
+    localStorage.setItem("taskList", JSON.stringify(localStorageData));
+
     // Close the form
+    console.log("taskList sub", updatedTaskList);
+    event.target.title.value = "";
+    event.target.description.value = "";
+    event.target.tags.value = "";
+    event.target.priority.value = "";
+
     setShowPop(false);
   };
 
-  // Use useEffect to update local storage after the state has been updated
-  useEffect(() => {
-    // Save updated task list to local storage
-    localStorage.setItem("taskList", JSON.stringify([taskList]));
-  }, [taskList]);
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-  console.log("taskList", taskList);
   return (
     <div className="">
       <form
@@ -63,8 +53,6 @@ export default function AddTask({ setShowPop }) {
               type="text"
               name="title"
               id="title"
-              value={formData.title}
-              onChange={handleChange}
               required
             />
           </div>
@@ -76,8 +64,6 @@ export default function AddTask({ setShowPop }) {
               type="text"
               name="description"
               id="description"
-              value={formData.description}
-              onChange={handleChange}
               required
             ></textarea>
           </div>
@@ -90,8 +76,6 @@ export default function AddTask({ setShowPop }) {
                 type="text"
                 name="tags"
                 id="tags"
-                value={formData.tags}
-                onChange={handleChange}
                 required
               />
             </div>
@@ -102,8 +86,6 @@ export default function AddTask({ setShowPop }) {
                 className="block w-full cursor-pointer rounded-md bg-[#2D323F] px-3 py-2.5"
                 name="priority"
                 id="priority"
-                value={formData.priority}
-                onChange={handleChange}
                 required
               >
                 <option value="">Select Priority</option>
