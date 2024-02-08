@@ -1,5 +1,7 @@
 import useContextData from "@/hooks/useContextData";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import EditTask from "./TaskComponnet/EditTask";
 import TaskHeader from "./TaskComponnet/TaskHeader";
 const getTagColor = (tag) => {
@@ -58,10 +60,12 @@ export default function TaskList() {
       return task;
     });
     setTaskList(updatedTaskList);
+    toast.success("Marked as completed!");
     localStorage.setItem("taskList", JSON.stringify(updatedTaskList));
   };
   return (
     <section className="mb-20" id="tasks">
+      <ToastContainer />
       <div className="container">
         <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#263046] px-6 py-8 md:px-9 md:py-16">
           <TaskHeader
