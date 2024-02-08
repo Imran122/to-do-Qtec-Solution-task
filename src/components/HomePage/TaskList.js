@@ -34,7 +34,6 @@ export default function TaskList() {
   };
 
   const handelShow = (id) => {
-    console.log("clicktaskList", taskList);
     const taskToEdit = taskList.find((task) => task.id === id);
     setTaskData(taskToEdit);
     setShowPop(!showPop);
@@ -44,12 +43,14 @@ export default function TaskList() {
     : " absolute top-60 opacity-0 scale-50 w-full left-0  duration-700";
 
   useEffect(() => {
-    const filteredTasks = taskList.filter((task) =>
-      task.title.toLowerCase().includes(searchQuery.toLowerCase())
+    const filteredTasks = taskList.filter(
+      (task) =>
+        task.title.toLowerCase().includes(searchQuery) ||
+        task.priority.toLowerCase().includes(searchQuery)
     );
     setSearchDataList(filteredTasks);
   }, [searchQuery, taskList]);
-  console.log("searchQuery", searchQuery);
+
   return (
     <section className="mb-20" id="tasks">
       <div className="container">

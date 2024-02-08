@@ -4,19 +4,15 @@ import AddTask from "./AddTask";
 
 export default function TaskHeader({ setSearchQuery }) {
   const [showPop, setShowPop] = useState(false);
-  const {
-    taskList,
-    setTaskList,
-
-    loading,
-    setLoading,
-  } = useContextData();
+  const { taskList, setTaskList, setSearchDataList, loading, setLoading } =
+    useContextData();
   const handelShow = () => {
     setShowPop(!showPop);
   };
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
+
   const modalClass = showPop
     ? "absolute z-50 top-40 w-full left-1/2 -translate-x-1/2 duration-700 opacity-100 scale-100 "
     : " absolute top-60 opacity-0 scale-50 w-full left-0  duration-700";
@@ -46,6 +42,7 @@ export default function TaskHeader({ setSearchQuery }) {
             className="block w-full cursor-pointer rounded-md bg-[#263046] px-3 py-2.5"
             name="priority"
             id="priority"
+            onChange={handleSearch}
             required
           >
             <option value="">FIlter By Priority</option>

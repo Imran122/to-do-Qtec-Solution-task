@@ -46,8 +46,7 @@ export default function AddTask({ setShowPop }) {
     setLoading(true);
     setShowPop(false);
   };
-  console.log("loading add page", loading);
-  console.log("add page taskList", taskList);
+
   return (
     <div className="">
       <form

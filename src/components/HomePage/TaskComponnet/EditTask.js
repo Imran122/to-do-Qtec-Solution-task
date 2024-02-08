@@ -5,12 +5,11 @@ export default function EditTask({ setShowPop, taskData }) {
   // Find the task to edit based on taskId
   const { taskList, setTaskList, loading, setLoading } = useContextData();
   const [formData, setFormData] = useState({});
-  console.log("taskData*****", taskData);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
-  console.log("formData", formData);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,7 +34,6 @@ export default function EditTask({ setShowPop, taskData }) {
     setShowPop(false);
   };
 
-  console.log("edit task", taskData);
   return (
     <div className="">
       <form
