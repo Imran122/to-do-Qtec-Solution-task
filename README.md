@@ -5,7 +5,7 @@ First, run the development server:
 npm install </br>
 npm run dev
 
-Open [https://to-do-qtec-solution-task.vercel.app/](live link) with your browser to see the result.
+Open [https://to-do-qtec-solution-task.vercel.app/] (live link) with your browser to see the result.
 
 ## Details
 
